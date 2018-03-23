@@ -1,0 +1,122 @@
+@height: 60px;
+@width: 50px;
+#timer:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+ul{
+    padding: 0;
+    &.hh, &.mm, &.ss {
+      margin: 0 2px;
+    }
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: relative;
+    float: left;
+    height: @height;
+    width: @width;
+    li {
+      display: inline-block;
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      font-size: 30px;
+      color: #ffffff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      perspective: 200px;
+      z-index: 0;
+      header, footer{
+        height: 30px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        section{
+          height: 60px;
+          text-align: center;
+          line-height: 60px;
+          font-size: 30px;
+          color: #ffffff;
+          width: 100%;
+          background-color: burlywood;
+        }
+      }
+      header{
+        transform-origin: 50% 100%;
+        section{
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+      footer{
+        transform-origin: 50% 0%;
+        section{
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+      }
+      &.before{
+        z-index: 2;
+        animation: zIndex 0s linear .5s  both;
+        header{
+          animation: turnOver .5s linear both;
+          /*z-index: 1;*/
+        }
+      }
+      &.active{
+        animation: zIndex2 0s linear .5s both;
+        footer{
+          /*z-index: 2;*/
+          animation: turnDown .5s .5s linear both;
+        }
+      }
+    }
+}
+
+.semicolon {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    float: left;
+    margin: 0 4px;
+}
+
+@keyframes turnOver {
+    0% {
+        transform:rotateX(-0deg);
+    }
+    100% {
+        transform:rotateX(-90deg);
+    }
+}
+@keyframes turnDown {
+    0% {
+        transform:rotateX(90deg);
+    }
+    100% {
+        transform:rotateX(0deg);
+    }
+}
+@keyframes zIndex {
+    0%{
+        z-index: 2;
+    }
+    100% {
+        z-index: 2;
+    }
+}
+@keyframes zIndex2 {
+    0%{
+        z-index: 1;
+    }
+    100%{
+        z-index: 3;
+    }
+}
