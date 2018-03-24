@@ -2,14 +2,19 @@
   "name": "flop",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/flop.js",
+  "main": "./index.js",
+  "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --env=dev",
     "build": "webpack --env=pro --progress --profile --colors",
     "babel": "babel-node"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/ZhouYK/flop.git"
+  },
+  "publishConfig": {
+    "registry": "http://npm.bkjk-inc.com"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
