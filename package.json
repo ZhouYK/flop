@@ -1,5 +1,5 @@
 {
-  "name": "flop",
+  "name": "time-flop",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",
@@ -12,9 +12,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZhouYK/flop.git"
-  },
-  "publishConfig": {
-    "registry": "http://npm.bkjk-inc.com"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
