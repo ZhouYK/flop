@@ -4,6 +4,7 @@
   "description": "",
   "main": "./index.js",
   "license": "MIT",
+  "author": "ink",
   "scripts": {
     "start": "webpack-dev-server --env=dev",
     "build": "webpack --env=pro --progress --profile --colors",
