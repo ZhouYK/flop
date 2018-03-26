@@ -7,7 +7,7 @@
 }
 ul{
     padding: 0;
-    &.hh, &.mm, &.ss {
+    &.hhhh, &.hh, &.mm, &.ss {
       margin: 0 2px;
     }
     list-style: none;
@@ -31,11 +31,13 @@ ul{
       top: 0;
       perspective: 200px;
       z-index: 0;
+      transform: translateZ(0);
       header, footer{
         height: 30px;
         position: relative;
         overflow: hidden;
         z-index: 1;
+        transform: translateZ(0);
         section{
           height: 60px;
           text-align: center;

@@ -9,10 +9,10 @@ const main = ({format, timeType, deadline, afterEnd}) => {
   }
   const allUl = {}
   const allUlOperatedFnc = {}
+  const partialArr = format.split(' ')
   //根据格式，生成对应格式位的进制
   const getConversionByType = (type) => (index) => {
     switch (type) {
-      case 'hh':
       case 'mm':
       case 'ss':
         if (index === 0) {
@@ -20,6 +20,15 @@ const main = ({format, timeType, deadline, afterEnd}) => {
         } else if (index  === 1) {
           return 10
         }
+      case 'hh':
+        if (index === 0) {
+          return 2
+        } else if (index === 1) {
+          return 10
+        }
+      //这种情况只会出现在倒计时或者计时，不会出现在记录时间上
+      case 'hhhh':
+        return 10
       default:
         ;
     }
@@ -49,8 +58,8 @@ const main = ({format, timeType, deadline, afterEnd}) => {
       ul.classList.add(`${value}`)
       let listLength = conversion
       while (listLength > 0) {
-        let li = generateLi(conversion - listLength)
-        ul.appendChild(li)
+        let lis = generateLi(conversion - listLength)
+        ul.appendChild(lis)
         listLength -= 1
       }
       partialArr.push(ul)
@@ -76,20 +85,31 @@ const main = ({format, timeType, deadline, afterEnd}) => {
       minutesNumber = Math.floor((futureGap - hoursNumber * 3600 * 1000) / (60 * 1000))
       secondsNumber = Math.floor((futureGap - hoursNumber * 3600 * 1000 - minutesNumber * 60 * 1000) / 1000)
     }
-    const zeroPrefix = (str) => {
-      if (str.length < 2) {
-        return Array.from(`0${str}`)
+    const zeroPrefix = (value, unit) => {
+      const valueLength = value.length,
+        unitLength = unit.length
+      let preStr = ''
+      if (valueLength < unitLength) {
+        preStr = `${'0'.repeat(unitLength - valueLength)}`
       }
-      return Array.from(str)
+      return Array.from(`${preStr}${value}`)
     }
-    const hours = zeroPrefix(hoursNumber.toString(10))
-    const minutes = zeroPrefix(minutesNumber.toString(10))
-    const seconds = zeroPrefix(secondsNumber.toString(10))
-    const timeMap = {
-      hh: hours,
-      mm: minutes,
-      ss: seconds
-    }
+    const hours = zeroPrefix(hoursNumber.toString(10), partialArr[0])
+    const minutes = zeroPrefix(minutesNumber.toString(10), partialArr[1])
+    const seconds = zeroPrefix(secondsNumber.toString(10), partialArr[2])
+    const timeMap = {}
+    partialArr.forEach((item, index) => {
+      let value
+      if (item === 'hhhh' || item === 'hh') {
+        value = hours
+      } else if (item === 'mm') {
+        value = minutes
+      } else if (item === 'ss') {
+        value = seconds
+      }
+      timeMap[item] = value
+    })
+
     for (let key in allUlOperatedFnc) {
       allUlOperatedFnc[key].map((fn, index) => {
         //对应ul列的处理函数，并传入对应的值
@@ -102,7 +122,7 @@ const main = ({format, timeType, deadline, afterEnd}) => {
   const counter = (ulDomList) => {
     const listArr = ulDomList.querySelectorAll('li')
     const colInfo = {
-      elList: listArr,
+      elList: Array.from(listArr),
       value: {
         before: undefined,
         current: undefined
@@ -142,6 +162,13 @@ const main = ({format, timeType, deadline, afterEnd}) => {
           preBeforeIndex = min
         }
       }
+      elList.map((item, index) => {
+        if (index !== preBeforeIndex && index !== beforeIndex && index !== current) {
+          const classList = item.classList
+          classList.remove('before')
+          classList.remove('active')
+        }
+      })
       let preBeforeDomClassList = elList[preBeforeIndex].classList
       let beforeDomClassList = elList[beforeIndex].classList
       preBeforeDomClassList.remove('before')
@@ -158,7 +185,6 @@ const main = ({format, timeType, deadline, afterEnd}) => {
       return afterEnd()
     }
     const fragment = document.createDocumentFragment()
-    const partialArr = format.split(' ')
     for(let value of partialArr) {
       allUl[value] = generateList(value)
       allUlOperatedFnc[value] = []
@@ -169,7 +195,6 @@ const main = ({format, timeType, deadline, afterEnd}) => {
     const appendChild = key => {
       count++
       const arr = allUl[key]
-      const length = arr.length
       if (count > 1 && count <= objectKeysLength) {
         const semicolon = document.createElement('span')
         semicolon.classList.add('semicolon')
@@ -178,10 +203,8 @@ const main = ({format, timeType, deadline, afterEnd}) => {
       }
       arr.map((list, index) => {
         fragment.appendChild(list)
-        if(length === 2) {
-          const conversion = index === 0 ? 6 : 10
-          allUlOperatedFnc[key].push(counter(list)(conversion))
-        }
+        const conversion = getConversionByType(key)(index)
+        allUlOperatedFnc[key].push(counter(list)(conversion))
       })
     }
     for(let key in allUl) {
@@ -195,7 +218,7 @@ const main = ({format, timeType, deadline, afterEnd}) => {
 //整理入参
 const flop = ({format, timeType, deadline, afterEnd} = {format: 'hh mm ss', timeType: 'time'}) => {
   const supportedType = ['time','countdown']
-  const supporteFormat = ['hh mm ss']
+  const supporteFormat = ['hh mm ss', 'hhhh mm ss']
   const options = {}
   format = !format ? 'hh mm ss' : format
   options.format = format
