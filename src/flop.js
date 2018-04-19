@@ -55,6 +55,7 @@ const main = ({format, timeType, deadline, afterEnd}) => {
     while (listNum > 0) {
       let conversion = getConversionByType(value)(value.length - listNum)
       let ul = document.createElement('ul')
+      ul.classList.add('time-flop')
       ul.classList.add(`${value}`)
       let listLength = conversion
       while (listLength > 0) {
