@@ -243,16 +243,4 @@ const flop = ({format, timeType, deadline, afterEnd} = {format: 'hh mm ss', time
   }
   return main(options)
 }
-//const factory = (require, exports) => {
-//  return flop
-//}
-//const wrapFnc = (fn) => {
-//  if (module && typeof module.exports === 'object') {
-//    let v = fn(require, exports)
-//    if (v !== undefined) module.exports = v
-//  } else if (typeof define === 'function' && define.amd) {
-//    define(['require', 'exports'], fn)
-//  }
-//}
-//wrapFnc(factory)
 export default flop

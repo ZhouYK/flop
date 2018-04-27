@@ -1,16 +1,15 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const publicPath = './';
 module.exports = {
   mode: 'production',
   entry: {
-    flop: ['babel-polyfill', './example/index.js']
+    flop: ['babel-polyfill', './src/flop.js']
   },
   output: {
-    filename: '[name]-[hash].js',
+    filename: '[name].js',
     // the output bundle
-    path: resolve(__dirname, 'example/dist'),
+    path: resolve(__dirname, 'pub/min'),
     publicPath: publicPath,
     libraryTarget: 'umd',
     // necessary for HMR to know where to load the hot update chunks
@@ -42,12 +41,6 @@ module.exports = {
         'NODE_ENV': '"production"'
       }
     } ),
-    new HtmlWebpackPlugin({
-      title: 'flop',
-      template: './index.hbs',
-      filename: './index.html',
-      chunks: ['flop']
-    }),
     new webpack.NamedModulesPlugin()
   ],
 };

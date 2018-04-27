@@ -1,13 +1,13 @@
 {
   "name": "time-flop",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
-  "main": "./index.js",
+  "main": "./pub/min/flop.js",
   "license": "MIT",
   "author": "ink",
   "scripts": {
     "start": "webpack-dev-server --env=dev",
-    "build": "webpack --env=pro --progress --profile --colors",
+    "build": "webpack --env=pro --progress --profile --colors && babel src --out-dir pub/src --copy-files",
     "babel": "babel-node"
   },
   "repository": {
@@ -18,9 +18,6 @@
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.10",
     "extract-text-webpack-plugin": "^3.0.2",
