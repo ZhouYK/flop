@@ -1,5 +1,6 @@
-@height: 60px;
-@width: 50px;
+@height: 30px;
+@width: 30px;
+@fontSize: 16px;
 @blue: #2c63ff;
 #timer:after{
     content: '';
@@ -21,11 +22,11 @@ ul.time-flop{
     width: @width;
     li {
       display: inline-block;
-      width: 50px;
-      height: 60px;
+      width: @width;
+      height: @height;
       text-align: center;
-      line-height: 60px;
-      font-size: 30px;
+      line-height: @height;
+      font-size: @fontSize;
       color: #ffffff;
       position: absolute;
       left: 0;
@@ -35,16 +36,16 @@ ul.time-flop{
       transform: translateZ(0);
       header, footer{
         border-radius: 4px;
-        height: 30px;
+        height: (@height/2);
         position: relative;
         overflow: hidden;
         z-index: 1;
         transform: translateZ(0);
         section{
-          height: 60px;
+          height: @height;
           text-align: center;
-          line-height: 60px;
-          font-size: 30px;
+          line-height: @height;
+          font-size: @fontSize;
           color: #ffffff;
           width: 100%;
           background-color: @blue;
@@ -86,8 +87,8 @@ ul.time-flop{
 
 .semicolon {
     display: inline-block;
-    height: 60px;
-    line-height: 60px;
+    height: @height;
+    line-height: @height;
     float: left;
     margin: 0 4px;
     font-size: 16px;

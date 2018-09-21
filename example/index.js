@@ -3,7 +3,8 @@
  */
 import flop from '../src/flop'
 flop({
-  format: 'hh mm ss'
+  format: 'hh mm ss',
+  size: 'small'
 })(document.getElementById('timer'))
 flop({
   format: 'hhhh mm ss',
