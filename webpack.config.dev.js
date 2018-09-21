@@ -25,7 +25,7 @@ module.exports = {
   devServer: {
     hot: true,
     // enable HMR on the server
-    host: `${ip}`,
+    host: '127.0.0.1',
     contentBase: resolve(__dirname, 'dist'),
     // match the output path
     //historyApiFallback: {

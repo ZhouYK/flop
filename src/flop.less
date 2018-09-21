@@ -1,5 +1,6 @@
 @height: 60px;
 @width: 50px;
+@blue: #2c63ff;
 #timer:after{
     content: '';
     display: block;
@@ -33,6 +34,7 @@ ul.time-flop{
       z-index: 0;
       transform: translateZ(0);
       header, footer{
+        border-radius: 4px;
         height: 30px;
         position: relative;
         overflow: hidden;
@@ -45,7 +47,7 @@ ul.time-flop{
           font-size: 30px;
           color: #ffffff;
           width: 100%;
-          background-color: burlywood;
+          background-color: @blue;
         }
       }
       header{
@@ -88,6 +90,8 @@ ul.time-flop{
     line-height: 60px;
     float: left;
     margin: 0 4px;
+    font-size: 16px;
+    color: @blue;
 }
 
 @keyframes turnOver {
