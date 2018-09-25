@@ -7,7 +7,7 @@ const fs = require('fs');
 module.exports = {
   mode: 'development',
   entry: {
-    index: ['babel-polyfill', './example/index.js'],
+    index: ['./example/index.js'],
   },
   output: {
     filename: '[name]-[hash].js',
@@ -45,7 +45,8 @@ module.exports = {
     rules: [
       {
         test: /\.js?$/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,

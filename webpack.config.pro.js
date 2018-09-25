@@ -4,7 +4,7 @@ const publicPath = './';
 module.exports = {
   mode: 'production',
   entry: {
-    flop: ['babel-polyfill', './src/flop.js']
+    flop: ['./src/flop.js']
   },
   output: {
     filename: '[name].js',
