@@ -1,9 +1,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ip = require("./getIp.js").getLocalIP();
 const publicPath = '/';
-const fs = require('fs');
 module.exports = {
   mode: 'development',
   entry: {

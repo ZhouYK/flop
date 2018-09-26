@@ -2,7 +2,7 @@
  * Created by ink on 2018/3/22.
  */
 import './flop.less'
-const main = ({format, timeType, deadline, afterEnd}) => {
+const main = ({format, timeType, deadline, afterEnd, size, theme}) => {
   let timestamp
   if (timeType === 'countdown') {
     timestamp = deadline.getTime()

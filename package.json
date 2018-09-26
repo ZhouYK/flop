@@ -7,8 +7,7 @@
   "author": "ink",
   "scripts": {
     "start": "webpack-dev-server --env=dev",
-    "build": "webpack --env=pro --progress --profile --colors && babel src --out-dir pub/src --copy-files",
-    "babel": "babel-node"
+    "build": "webpack --env=pro --progress --profile --colors && babel src --out-dir pub/src --copy-files"
   },
   "repository": {
     "type": "git",
