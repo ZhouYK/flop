@@ -9,5 +9,5 @@ flop({
 flop({
   format: 'hhhh mm ss',
   timeType: 'countdown',
-  deadline: new Date('2018-10-01 00:00:00')
+  deadline: new Date('2018-12-13 00:00:00')
 })(document.getElementById('countdown'))
