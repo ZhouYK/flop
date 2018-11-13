@@ -1,6 +1,8 @@
 # 翻牌效果倒计时插件
 > 原生js代码，不依赖任何库
 
+![效果](/example/timeflop.gif)
+
 ## 使用
 
 ```bash
